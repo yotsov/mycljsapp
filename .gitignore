@@ -1,0 +1,6 @@
+/.classpath
+/.project
+/bin/
+/target/
+/figwheel_server.log
+/resources/public/js/
