@@ -1,6 +1,6 @@
 (defproject mycljsapp "0.1.0-SNAPSHOT"
   ; lein -v
-  ; Leiningen 2.5.3 on Java 1.8.0_51 Java HotSpot(TM) 64-Bit Server VM
+  ; Leiningen 2.7.1 on Java 1.8.0_51 Java HotSpot(TM) 64-Bit Server VM
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
                  [reagent "0.5.1"]
