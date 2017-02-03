@@ -1,12 +1,12 @@
 (defproject mycljsapp "0.1.0-SNAPSHOT"
   ; lein -v
   ; Leiningen 2.7.1 on Java 1.8.0_51 Java HotSpot(TM) 64-Bit Server VM
-  :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.170"]
-                 [reagent "0.5.1"]
-                 [figwheel "0.5.0-2"]]
-  :plugins [[lein-figwheel "0.5.0-2"]
-            [lein-cljsbuild "1.1.2"]]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.456"]
+                 [reagent "0.6.0"]
+                 [figwheel "0.5.9"]]
+  :plugins [[lein-figwheel "0.5.9"]
+            [lein-cljsbuild "1.1.5"]]
   
   :clean-targets ^{:protect false} ["target" "resources/public/js/compiled"]
   
@@ -22,6 +22,7 @@
                        {:id "prod"
                         ; first comment out the dev only line in core.cljs, and then:
                         ; lein do clean, cljsbuild once prod
+                        :source-paths ["src-cljs/"]
                        	:compiler {:optimizations :advanced
                                    :output-to "resources/public/js/compiled/app.js"}}]}
   
