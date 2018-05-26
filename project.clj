@@ -20,7 +20,6 @@
                                    :main "mycljsapp.core"
                                    :asset-path "js/compiled/out"}}
                        {:id "prod"
-                        ; first comment out the dev only line in core.cljs, and then:
                         ; lein do clean, cljsbuild once prod
                         :source-paths ["src-cljs/"]
                        	:compiler {:optimizations :advanced
