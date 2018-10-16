@@ -5,20 +5,23 @@
 
 (def horwalls [[5 5] [6 5] [7 5] [8 5] [9 5] [10 5] [5 11] [6 11] [7 11] [8 11] [9 11] [10 11] [8 8] [7 7] [8 10]])
 
-(defonce state (reagent/atom {:centerx 3 :centery 3}))
+(def radius 4)
+(def diameter (+ 1 (* 2 radius)))
+
+(defonce state (reagent/atom {:centerx 6 :centery 4}))
 
 (defn is-in? [an-item a-seq]
   (some #{an-item} a-seq))
 
 (defn cell [x y]
-  (let [realx (- x (- 5 (:centerx @state)))
-        realy (- y (- 5 (:centery @state)))]
+  (let [realx (- x (- radius (:centerx @state)))
+        realy (- y (- radius (:centery @state)))]
     [:td
      {:key (str "cell" x "-" y)
       :style {:background-image
               (clojure.string/join
                 ","
-                (remove nil? [(if (= [5 5] [x y]) "url(img/center.png)" nil)
+                (remove nil? [(if (= [radius radius] [x y]) "url(img/center.png)" nil)
 
                               (if (is-in? [realx realy] verwalls) "url(img/wall-left.png)" nil)
                               (if (is-in? [(inc realx) realy] verwalls) "url(img/wall-right.png)" nil)
@@ -44,9 +47,9 @@
 (defn page [] [:table
                {:id "grid" :style {:border-collapse :collapse :border "1px solid black"} :cellSpacing "0"}
                [:tbody
-                (doall (for [x (range 12)]
+                (doall (for [x (range diameter)]
                          [:tr {:key (str "row" x)}
-                          (doall (for [y (range 12)]
+                          (doall (for [y (range diameter)]
                                    [cell y x]))]))]])
 
 (defn handle-keydown [e]
@@ -55,7 +58,6 @@
   (if (= 65 (.-keyCode e)) (if (not (is-in? [(:centerx @state) (:centery @state)] verwalls)) (swap! state update-in [:centerx] dec)))
   (if (= 68 (.-keyCode e)) (if (not (is-in? [(inc (:centerx @state)) (:centery @state)] verwalls)) (swap! state update-in [:centerx] inc))))
 
-;(.removeEventListener js/document "keydown")
 (.addEventListener js/document "keydown" handle-keydown)
 
 (reagent/render-component [page] (.getElementById js/document "app"))
